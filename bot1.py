@@ -24,3 +24,15 @@ login_button_2.click()
 driver.implicitly_wait(10)
 popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open > div > .UIModalHeader > div > span > div > span > button")
 popup_button_1.click()
+
+#Go to the lesson
+driver.get("https://quizlet.com/160098296/unit-1-lesson-1-infinitive-action-verbs-flash-cards/")
+
+#Go to the match
+match_button = driver.find_element_by_css_selector("#SetPageTarget > div > div.SetPage-menu > div > div.SetPage-modes > div > div > div.SetPageModes-group.SetPageModes-group--play > span:nth-child(1) > div > a")
+match_button.click()
+
+#Close out of the pop-up
+driver.implicitly_wait(10)
+popup_button_2 = driver.find_element_by_css_selector("body > div:nth-child(3) > div > div.UIModal.is-white.is-open > div > div > div > div.MatchModeInstructionsModal-button > button")
+popup_button_2.click()
