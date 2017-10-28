@@ -38,7 +38,7 @@ driver.implicitly_wait(10)
 popup_button_2 = driver.find_element_by_css_selector(".MatchModeInstructionsModal-button > .UIButton--hero")
 popup_button_2.click()
 
-# Get the buttons and their text
+# Set the buttons and their text
 b1 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(1)")
 b2 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(2)")
 b3 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(3)")
@@ -123,16 +123,6 @@ a1.append(b10t)
 a1.append(b11t)
 a1.append(b12t)
 
-#Dictionary for the current words that are on the screen to be matched up
-screenmatches = {}
-
-#Compare texts of array against each other and match up
-for i in a1:
-    for h in a1:
-        for spanish, english in spaneng.iteritems():
-            if i == spanish and  h == english:
-                screenmatches[i] = h
-
 #Add buttons to array
 a2 = []
 a2.append(b1)
@@ -147,6 +137,16 @@ a2.append(b9)
 a2.append(b10)
 a2.append(b11)
 a2.append(b12)
+
+#Dictionary for the current words that are on the screen to be matched up
+screenmatches = {}
+
+#Compare texts of array against each other and match up
+for i in a1:
+    for h in a1:
+        for spanish, english in spaneng.iteritems():
+            if i == spanish and  h == english:
+                screenmatches[i] = h
 
 #Click on the buttons
 for key, value in screenmatches.iteritems():
