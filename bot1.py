@@ -126,7 +126,7 @@ a1.append(b12t)
 #Dictionary for the current words that are on the screen to be matched up
 screenmatches = {}
 
-#Compare texts of array against each other
+#Compare texts of array against each other and match up
 for i in a1:
     for h in a1:
         for spanish, english in spaneng.iteritems():
@@ -148,6 +148,7 @@ a2.append(b10)
 a2.append(b11)
 a2.append(b12)
 
+#Click on the buttons
 for key, value in screenmatches.iteritems():
     a2[a1.index(key)].click()
     a2[a1.index(value)].click()
