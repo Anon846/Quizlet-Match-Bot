@@ -1,4 +1,7 @@
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from selenium import webdriver
 from getpass import getpass
 import getpass
@@ -18,7 +21,6 @@ login_button_2 = driver.find_element_by_css_selector(".LoginPromptModal-form>.UI
 login_button_2.click()
 
 #Close out of the pop-up
+driver.implicitly_wait(10)
 popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open > div > .UIModalHeader > div > span > div > span > button")
 popup_button_1.click()
-
-
