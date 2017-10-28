@@ -16,7 +16,9 @@ password_field = driver.find_element_by_css_selector(".LoginPromptModal-loginFie
 password_field.send_keys(password)
 login_button_2 = driver.find_element_by_css_selector(".LoginPromptModal-form>.UIButton--hero")
 login_button_2.click()
-# End of login code
 
+#Close out of the pop-up
+popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open > div > .UIModalHeader > div > span > div > span > button")
+popup_button_1.click()
 
 
