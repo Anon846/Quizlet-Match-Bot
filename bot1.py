@@ -27,11 +27,7 @@ popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open >
 popup_button_1.click()
 
 #Go to the lesson
-driver.get("https://quizlet.com/160098296/unit-1-lesson-1-infinitive-action-verbs-flash-cards/")
-
-#Go to the match
-match_button = driver.find_element_by_css_selector("#SetPageTarget > div > div.SetPage-menu > div > div.SetPage-modes > div > div > div.SetPageModes-group.SetPageModes-group--play > span:nth-child(1) > div > a")
-match_button.click()
+driver.get("https://quizlet.com/160098296/match")
 
 #Close out of the pop-up
 driver.implicitly_wait(10)
@@ -145,10 +141,13 @@ screenmatches = {}
 for i in a1:
     for h in a1:
         for spanish, english in spaneng.iteritems():
-            if i == spanish and  h == english:
+            if i.decode('utf-8') == spanish.decode('utf-8') and  h == english:
                 screenmatches[i] = h
 
 #Click on the buttons
 for key, value in screenmatches.iteritems():
     a2[a1.index(key)].click()
     a2[a1.index(value)].click()
+
+#Click on the buttons that aren't ended up being clicked (because of the whole unicode issue thing)
+#for i in a2:
