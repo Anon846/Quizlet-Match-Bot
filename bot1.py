@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from getpass import getpass
+import unidecode
 import getpass
 
 #Block of login code
@@ -26,13 +27,13 @@ driver.implicitly_wait(10)
 popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open > div > .UIModalHeader > div > span > div > span > button")
 popup_button_1.click()
 
-#Go to the lesson
+#Go to the match
 driver.get("https://quizlet.com/160098296/match")
 
 #Close out of the pop-up
 driver.implicitly_wait(10)
-popup_button_2 = driver.find_element_by_css_selector(".MatchModeInstructionsModal-button > .UIButton--hero")
-popup_button_2.click()
+popup_button = driver.find_element_by_css_selector(".MatchModeInstructionsModal-button > .UIButton--hero")
+popup_button.click()
 
 # Set the buttons and their text
 b1 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(1)")
@@ -141,7 +142,7 @@ screenmatches = {}
 for i in a1:
     for h in a1:
         for spanish, english in spaneng.iteritems():
-            if i.decode('utf-8') == spanish.decode('utf-8') and  h == english:
+            if i == spanish and  h == english:
                 screenmatches[i] = h
 
 #Click on the buttons
