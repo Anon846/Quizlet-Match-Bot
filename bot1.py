@@ -1,4 +1,4 @@
-# coding=UTF-8
+w# coding=UTF-8
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -135,6 +135,21 @@ a2.append(b10)
 a2.append(b11)
 a2.append(b12)
 
+#Array that contains the buttons that haven't been clicked left
+a3 = []
+a3.append(b1)
+a3.append(b2)
+a3.append(b3)
+a3.append(b4)
+a3.append(b5)
+a3.append(b6)
+a3.append(b7)
+a3.append(b8)
+a3.append(b9)
+a3.append(b10)
+a3.append(b11)
+a3.append(b12)
+
 #Dictionary for the current words that are on the screen to be matched up
 screenmatches = {}
 
@@ -151,4 +166,5 @@ for key, value in screenmatches.iteritems():
     a2[a1.index(value)].click()
 
 #Click on the buttons that aren't ended up being clicked (because of the whole unicode issue thing)
-#for i in a2:
+for i in a3:
+    i.click()
