@@ -8,7 +8,7 @@ from getpass import getpass
 import unidecode
 import getpass
 
-#Block of login code
+# Login code
 username = raw_input("Username: ")
 password = getpass.getpass()
 driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
@@ -22,15 +22,15 @@ password_field.send_keys(password)
 login_button_2 = driver.find_element_by_css_selector(".LoginPromptModal-form>.UIButton--hero")
 login_button_2.click()
 
-#Close out of the pop-up
+# Close the pop-up
 driver.implicitly_wait(10)
 popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open > div > .UIModalHeader > div > span > div > span > button")
 popup_button_1.click()
 
-#Go to the match
+# Go to the match
 driver.get("https://quizlet.com/160098296/match")
 
-#Close out of the pop-up
+# Close the pop-up
 driver.implicitly_wait(10)
 popup_button = driver.find_element_by_css_selector(".MatchModeInstructionsModal-button > .UIButton--hero")
 popup_button.click()
@@ -61,7 +61,7 @@ b10t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div >
 b11t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(11) > div > div.MatchModeQuestionGridTile-content > div > div").text
 b12t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(12) > div > div.MatchModeQuestionGridTile-content > div > div").text
 
-#Dictonary of Spanish to English
+# Dictonary of Spanish to English
 spaneng = {
     "andar end patineta": "to skateboard",
     "preparar la comida": "to prepare food",
@@ -105,7 +105,7 @@ spaneng = {
     "alquilar un DVD": "to rent a DVD"
 }
 
-#Add texts to array
+# Add texts to array
 a1 = []
 a1.append(b1t)
 a1.append(b2t)
@@ -120,7 +120,7 @@ a1.append(b10t)
 a1.append(b11t)
 a1.append(b12t)
 
-#Add buttons to array
+# Add buttons to array
 a2 = []
 a2.append(b1)
 a2.append(b2)
@@ -135,7 +135,7 @@ a2.append(b10)
 a2.append(b11)
 a2.append(b12)
 
-#Array that contains the buttons that haven't been clicked left
+# Array that contains the buttons that haven't been clicked left
 a3 = []
 a3.append(b1)
 a3.append(b2)
@@ -150,10 +150,10 @@ a3.append(b10)
 a3.append(b11)
 a3.append(b12)
 
-#Dictionary for the current words that are on the screen to be matched up
+# Dictionary for the current words that are on the screen to be matched up
 screenmatches = {}
 
-#Compare texts of array against each other and match up
+# Compare texts of array against each other and match up
 for i in a1:
     for h in a1:
         for spanish, english in spaneng.iteritems():
