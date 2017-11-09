@@ -28,7 +28,7 @@ popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open >
 popup_button_1.click()
 
 # Go to the match
-driver.get("https://quizlet.com/160098296/match")
+driver.get("https://quizlet.com/160122716/match")
 
 # Close the pop-up
 driver.implicitly_wait(10)
@@ -62,7 +62,8 @@ b11t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div >
 b12t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(12) > div > div.MatchModeQuestionGridTile-content > div > div").text
 
 # Dictonary of Spanish to English
-spaneng = {
+'''
+spaneng_infinitive_action_verbs = {
     "andar end patineta": "to skateboard",
     "preparar la comida": "to prepare food",
     "practicar un instrumento": "to practice an instrument",
@@ -103,6 +104,31 @@ spaneng = {
     "beber": "to drink",
     "aprender el español": "to learn Spanish",
     "alquilar un DVD": "to rent a DVD"
+}
+'''
+spaneng = {
+    "SER": "to be",
+    "soy": "I am",
+    "Soy un estudiante.": "I am a student",
+    "Soy una estudiante.": "I am a student",
+    "Soy un chico": "I am a boy",
+    "Soy una chica": "I am a girl.",
+    "eres": "you are",
+    "Eres mi amigo": "You are my friend",
+    "él es": "he is",
+    "Miguel es un jugador de fútbol.": "Miguel is a soccer player.",
+    "ella es": "she is",
+    "Julia es una jugadora de voleibol.": "Julia is a volleyball player",
+    "usted es": "you are (formal)",
+    "Usted es el director.": "You are the principal.",
+    "somos": "we are",
+    "Somos amigos": "We are friends",
+    "ellos son": "they are",
+    "Ellos son turistas.": "They are tourists.",
+    "ellas son": "they are",
+    "Ellas son hermanas.": "They are sisters",
+    "ustedes son": "you all are",
+    "Ustedes son ciudadanos americanos.": "You all are American citizens."
 }
 
 # Add texts to array
