@@ -9,7 +9,7 @@ import unidecode
 import getpass
 
 # Login code
-username = raw_input("Username: ")
+username = input("Username: ")
 password = getpass.getpass()
 driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 driver.get("https://quizlet.com/")
@@ -182,12 +182,12 @@ screenmatches = {}
 # Compare texts of array against each other and match up
 for i in a1:
     for h in a1:
-        for spanish, english in spaneng.iteritems():
+        for spanish, english in spaneng.items():
             if i == spanish and  h == english:
                 screenmatches[i] = h
 
 #Click on the buttons
-for key, value in screenmatches.iteritems():
+for key, value in screenmatches.items():
     a2[a1.index(key)].click()
     a2[a1.index(value)].click()
 
