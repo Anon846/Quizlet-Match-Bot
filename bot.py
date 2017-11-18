@@ -11,7 +11,7 @@ import getpass
 # Login code
 username = input("Username: ")
 password = getpass.getpass()
-driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
+driver = webdriver.Chrome(r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe")
 driver.get("https://quizlet.com/")
 login_button_1 = driver.find_element_by_css_selector(".SiteHeader-signIn>button")
 login_button_1.click()
