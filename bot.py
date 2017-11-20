@@ -5,12 +5,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from getpass import getpass
+import numpy as np
 import unidecode
 import getpass
 
 # Login code
 username = input("Username: ")
 password = getpass.getpass()
+match_url = input("Match/Lesson/Unit URL: ")
 driver = webdriver.Chrome(r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe")
 driver.get("https://quizlet.com/")
 login_button_1 = driver.find_element_by_css_selector(".SiteHeader-signIn>button")
@@ -28,7 +30,95 @@ popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open >
 popup_button_1.click()
 
 # Go to the match
-driver.get("https://quizlet.com/160122716/match")
+driver.get(match_url)
+
+# Conversion list
+conversion_list_elements = [];
+spanengcontainers = []
+spaneng = {}
+for i in driver.find_elements_by_css_selector("#SetPageTarget > div > div.SetPage-diagramAndTerms > div.UIDiv.SetPage-termsWrapper > div > div > div > div"):
+    conversion_list_elements.append(i)
+    key_value = driver.find_elements_by_css_selector(".UIDiv.SetPage-termsWrapper > div > div > div > div:nth-child(%d) > div > div > div.SetPageTerm-contentWrapper > div > div" % conversion_list_elements.index(i))
+    key = ""
+    value = ""
+    for x in key_value:
+        if key == "":
+            key = x
+        else:
+            value = x
+    #blah = conversion_list_elements.index(i) + 1
+    '''++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    I know nobody is probably looking at this code, but if anyone is, then please forgive
+    me for this horrible piece of code below, and feel free to post to r/badcode on reddit,
+    but message me, Tednedinashed, because I'd like to see my fail. I TRIED, OKAY.
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'''
+    if conversion_list_elements.index(i) == 1:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[1]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 2:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[2]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 3:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[3]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[3]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 4:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[4]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[4]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 5:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 6:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[6]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[6]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 7:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[7]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[7]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 8:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[8]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[8]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 9:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[9]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[9]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 10:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[10]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[10]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 11:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[11]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[11]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 12:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[12]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[12]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 13:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[13]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[13]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 14:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[14]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[14]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 15:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[15]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[15]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 16:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[16]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[16]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 17:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[17]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[17]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 18:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[18]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[18]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 19:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[19]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[19]/div/div/div[1]/div/div[2]/div/a/span").text
+    elif conversion_list_elements.index(i) == 20:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[20]/div/div/div[1]/div/div[1]/div/a/span").text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[20]/div/div/div[1]/div/div[2]/div/a/span").text
+    spaneng[key] = value
+
+# Go to the match
+match_button = driver.find_element_by_css_selector(".SetPage-modes > div > div > .SetPageModes-group.SetPageModes-group--play > span:nth-child(1) > div > a")
+match_button.click()
 
 # Close the pop-up
 driver.implicitly_wait(10)
@@ -61,76 +151,7 @@ b10t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div >
 b11t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(11) > div > div.MatchModeQuestionGridTile-content > div > div").text
 b12t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(12) > div > div.MatchModeQuestionGridTile-content > div > div").text
 
-# Dictonary of Spanish to English
-'''
-spaneng_infinitive_action_verbs = {
-    "andar end patineta": "to skateboard",
-    "preparar la comida": "to prepare food",
-    "practicar un instrumento": "to practice an instrument",
-    "escribir": "to write",
-    "bailar": "to dance",
-    "cantar": "to sing",
-    "comprar": "to buy",
-    "descansar": "to rest",
-    "dibujar": "to draw",
-    "hablar": "to talk",
-    "montar en caballo": "to ride a horse",
-    "pasar un rato con los amigos": "to spend time with friends",
-    "tocar la guitarra": "to play the guitar",
-    "tocar el piano": "to play the piano",
-    "enseñar": "to teach",
-    "escuchar música": "to listen to music",
-    "estudiar": "to study",
-    "hacer la tarea": "to do homework",
-    "ir a la escuela": "to go to school",
-    "jugar al fútbol": "to play soccer",
-    "jugar al baloncesto": "to play basketball",
-    "leer": "to read",
-    "mirar la televisión": "to watch television",
-    "montar en bicicleta": "to ride a bike",
-    "nadar": "to swim",
-    "practicar los deportes": "to practice sports",
-    "pescar": "to fish",
-    "pintar": "to paint",
-    "pasear": "to go for a walk",
-    "preparar la comida": "to prepare food",
-    "trabajar": "to work",
-    "dormir": "to sleep",
-    "correr": "to run",
-    "comer": "to eat",
-    "cocinar": "to cook",
-    "cazar": "to hunt",
-    "caminar": "to walk",
-    "beber": "to drink",
-    "aprender el español": "to learn Spanish",
-    "alquilar un DVD": "to rent a DVD"
-}
-'''
-spaneng = {
-    "SER": "to be",
-    "soy": "I am",
-    "Soy un estudiante.": "I am a student",
-    "Soy una estudiante.": "I am a student",
-    "Soy un chico": "I am a boy",
-    "Soy una chica": "I am a girl.",
-    "eres": "you are",
-    "Eres mi amigo": "You are my friend",
-    "él es": "he is",
-    "Miguel es un jugador de fútbol.": "Miguel is a soccer player.",
-    "ella es": "she is",
-    "Julia es una jugadora de voleibol.": "Julia is a volleyball player",
-    "usted es": "you are (formal)",
-    "Usted es el director.": "You are the principal.",
-    "somos": "we are",
-    "Somos amigos": "We are friends",
-    "ellos son": "they are",
-    "Ellos son turistas.": "They are tourists.",
-    "ellas son": "they are",
-    "Ellas son hermanas.": "They are sisters",
-    "ustedes son": "you all are",
-    "Ustedes son ciudadanos americanos.": "You all are American citizens."
-}
-
+# Insert button elements and dictionaries above
 # Add texts to array
 a1 = []
 a1.append(b1t)
