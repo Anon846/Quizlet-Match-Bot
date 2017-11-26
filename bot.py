@@ -45,14 +45,7 @@ for i in driver.find_elements_by_css_selector("#SetPageTarget > div > div.SetPag
             key = x
         else:
             value = x
-    #blah = conversion_list_elements.index(i) + 1
-    '''++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-    I know nobody is probably looking at this code, but if anyone is, then please forgive
-    me for this horrible piece of code below, and feel free to post to r/badcode on reddit,
-    but message me, Tednedinashed, because I'd like to see my fail. I TRIED, OKAY.
-
-    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'''
+            
     if conversion_list_elements.index(i) == 1:
         key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[1]/div/div/div[1]/div/div[1]/div/a/span").text
         value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/a/span").text
