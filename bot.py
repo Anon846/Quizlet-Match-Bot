@@ -8,11 +8,14 @@ from getpass import getpass
 import unidecode
 import getpass
 
+# I haven't tested this code yet, just did it so yeah
+windows_username = os.path.join('..','Documents and Settings',os.getlogin(),'Desktop')
+
 # Login code
 username = input("Username: ")
 password = getpass.getpass()
 match_url = input("Match/Lesson/Unit URL: ")
-driver = webdriver.Chrome(r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe")
+driver = webdriver.Chrome(r"C:\Users\%s\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe" % windows_username)
 driver.get("https://quizlet.com/")
 login_button_1 = driver.find_element_by_css_selector(".SiteHeader-signIn>button")
 login_button_1.click()
