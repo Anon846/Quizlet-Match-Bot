@@ -8,14 +8,24 @@ from getpass import getpass
 import numpy as np
 import unidecode
 import getpass
+import sys
+
+# Find username of user on computer
+user = getpass.getuser()
 
 # Ask for inputs
 username = input("Username: ")
 password = getpass.getpass()
 match_url = input("Match/Lesson/Unit URL: ")
 
-# Set the driver
-driver = webdriver.Chrome(r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe")
+# Find the platform (obviously only Windows /andsoonlinux!/ is supported) and set the driver
+# If you are on macOS feel free to submit a pull request of however the heck you need to set your driver path
+if sys.platform == "win32":
+    directory = r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe"
+    directory = directory.replace("Jesus Christ", user)
+    driver = webdriver.Chrome(directory)
+
+#driver = webdriver.Chrome(r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe")
 
 # Login to Quizlet
 driver.get("https://quizlet.com/")
@@ -100,7 +110,6 @@ b10t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div >
 b11t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(11) > div > div.MatchModeQuestionGridTile-content > div > div").text
 b12t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(12) > div > div.MatchModeQuestionGridTile-content > div > div").text
 
-# Insert button elements and dictionaries above
 # Add texts to array
 a1 = []
 a1.append(b1t)
