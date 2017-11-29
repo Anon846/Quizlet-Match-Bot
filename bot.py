@@ -9,7 +9,7 @@ import numpy as np
 import unidecode
 import getpass
 import sys
-#
+
 # Find username of user on computer
 user = getpass.getuser()
 
@@ -24,8 +24,6 @@ if sys.platform == "win32":
     directory = r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe"
     directory = directory.replace("Jesus Christ", user)
     driver = webdriver.Chrome(directory)
-
-#driver = webdriver.Chrome(r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe")
 
 # Login to Quizlet
 driver.get("https://quizlet.com/")
@@ -84,91 +82,38 @@ driver.implicitly_wait(10)
 popup_button = driver.find_element_by_css_selector(".MatchModeInstructionsModal-button > .UIButton--hero")
 popup_button.click()
 
-# Set the buttons and their text
-b1 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(1)")
-b2 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(2)")
-b3 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(3)")
-b4 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(4)")
-b5 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(5)")
-b6 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(6)")
-b7 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(7)")
-b8 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(8)")
-b9 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(9)")
-b10 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(10)")
-b11 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(11)")
-b12 = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(12)")
-b1t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(1) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b2t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(2) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b3t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(3) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b4t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(4) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b5t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(5) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b6t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(6) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b7t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(7) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b8t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(8) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b9t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(9) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b10t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(10) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b11t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(11) > div > div.MatchModeQuestionGridTile-content > div > div").text
-b12t = driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(12) > div > div.MatchModeQuestionGridTile-content > div > div").text
 
-# Add texts to array
+# Set the buttons and their text and button array I honestly dont know anymore I am just typing
 a1 = []
-a1.append(b1t)
-a1.append(b2t)
-a1.append(b3t)
-a1.append(b4t)
-a1.append(b5t)
-a1.append(b6t)
-a1.append(b7t)
-a1.append(b8t)
-a1.append(b9t)
-a1.append(b10t)
-a1.append(b11t)
-a1.append(b12t)
+for i in range(12):
+    c = i + 1
+    a1.append(driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(%d)" % c))
 
-# Add buttons to array
+# Set the texts and what the heck
 a2 = []
-a2.append(b1)
-a2.append(b2)
-a2.append(b3)
-a2.append(b4)
-a2.append(b5)
-a2.append(b6)
-a2.append(b7)
-a2.append(b8)
-a2.append(b9)
-a2.append(b10)
-a2.append(b11)
-a2.append(b12)
+for i in range(12):
+    c = i + 1
+    a2.append(driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(%d) > div > div.MatchModeQuestionGridTile-content > div > div" % c).text)
 
 # Array that contains the buttons that haven't been clicked left
 a3 = []
-a3.append(b1)
-a3.append(b2)
-a3.append(b3)
-a3.append(b4)
-a3.append(b5)
-a3.append(b6)
-a3.append(b7)
-a3.append(b8)
-a3.append(b9)
-a3.append(b10)
-a3.append(b11)
-a3.append(b12)
+for i in range(12):
+    a3.append(a1[i])
 
 # Dictionary for the current words that are on the screen to be matched up
 screenmatches = {}
 
 # Compare texts of array against each other and match up
-for i in a1:
-    for h in a1:
+for i in a2:
+    for h in a2:
         for spanish, english in spaneng.items():
             if i == spanish and  h == english:
                 screenmatches[i] = h
 
 #Click on the buttons
 for key, value in screenmatches.items():
-    a2[a1.index(key)].click()
-    a2[a1.index(value)].click()
+    a1[a2.index(key)].click()
+    a1[a2.index(value)].click()
 
 #Click on the buttons that aren't ended up being clicked (because of the whole unicode issue thing)
 for i in a3:
