@@ -71,13 +71,14 @@ for i in driver.find_elements_by_css_selector("#SetPageTarget > div > div.SetPag
     else:
         key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[1]/div/a/span").text
         value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[2]/div/a/span").text
+
     spaneng[key] = value
 
 # Click on the match button
 match_button = driver.find_element_by_css_selector(".SetPage-modes > div > div > .SetPageModes-group.SetPageModes-group--play > span:nth-child(1) > div > a")
 match_button.click()
 
-# Close the pop-up
+# Wait for and then close out of the pop-up
 driver.implicitly_wait(10)
 popup_button = driver.find_element_by_css_selector(".MatchModeInstructionsModal-button > .UIButton--hero")
 popup_button.click()
