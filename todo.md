@@ -8,3 +8,4 @@
 * ~~Automatically detect and use windows username 👋 to find web driver path. 💾~~ Done ✔️
 * Add support for Linux. 💻
 * Literally just clean up the code so I don't need to post it on r/badcode 👎 again. 📧🚫
+* Stop updating todo.md so much. 🕑♻️
