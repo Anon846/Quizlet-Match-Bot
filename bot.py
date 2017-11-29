@@ -5,17 +5,19 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from getpass import getpass
+import numpy as np
 import unidecode
 import getpass
 
-# I haven't tested this code yet, just did it so yeah
-windows_username = os.path.join('..','Documents and Settings',os.getlogin(),'Desktop')
-
-# Login code
+# Ask for inputs
 username = input("Username: ")
 password = getpass.getpass()
 match_url = input("Match/Lesson/Unit URL: ")
-driver = webdriver.Chrome(r"C:\Users\%s\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe" % windows_username)
+
+# Set the driver
+driver = webdriver.Chrome(r"C:\Users\Jesus Christ\AppData\Local\Programs\Python\Python36-32\Scripts\chromedriver.exe")
+
+# Login to Quizlet
 driver.get("https://quizlet.com/")
 login_button_1 = driver.find_element_by_css_selector(".SiteHeader-signIn>button")
 login_button_1.click()
@@ -31,13 +33,19 @@ driver.implicitly_wait(10)
 popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open > div > .UIModalHeader > div > span > div > span > button")
 popup_button_1.click()
 
-# Go to the match
+# Go to the match_url
 driver.get(match_url)
 
-# Conversion list
+# Select the method to sort the answers
+original_option = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/span/div/div/div/div/div/select/option[1]")
+original_option.click()
+
+# Conversion list (makes key/value pairs for the matchURL)
 conversion_list_elements = [];
 spanengcontainers = []
 spaneng = {}
+
+# Iterate through all the elements that contain those key/values
 for i in driver.find_elements_by_css_selector("#SetPageTarget > div > div.SetPage-diagramAndTerms > div.UIDiv.SetPage-termsWrapper > div > div > div > div"):
     conversion_list_elements.append(i)
     key_value = driver.find_elements_by_css_selector(".UIDiv.SetPage-termsWrapper > div > div > div > div:nth-child(%d) > div > div > div.SetPageTerm-contentWrapper > div > div" % conversion_list_elements.index(i))
@@ -48,70 +56,16 @@ for i in driver.find_elements_by_css_selector("#SetPageTarget > div > div.SetPag
             key = x
         else:
             value = x
-            
-    if conversion_list_elements.index(i) == 1:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[1]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 2:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[2]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[2]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 3:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[3]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[3]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 4:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[4]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[4]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 5:
+
+    if (conversion_list_elements.index(i) + 1) != 4:
+        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[%d]/div/div/div[1]/div/div[1]/div/a/span" % (conversion_list_elements.index(i) + 1)).text
+        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[%d]/div/div/div[1]/div/div[2]/div/a/span" % (conversion_list_elements.index(i) + 1)).text
+    else:
         key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[1]/div/a/span").text
         value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 6:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[6]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[6]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 7:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[7]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[7]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 8:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[8]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[8]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 9:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[9]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[9]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 10:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[10]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[10]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 11:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[11]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[11]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 12:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[12]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[12]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 13:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[13]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[13]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 14:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[14]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[14]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 15:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[15]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[15]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 16:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[16]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[16]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 17:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[17]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[17]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 18:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[18]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[18]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 19:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[19]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[19]/div/div/div[1]/div/div[2]/div/a/span").text
-    elif conversion_list_elements.index(i) == 20:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[20]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[20]/div/div/div[1]/div/div[2]/div/a/span").text
     spaneng[key] = value
 
-# Go to the match
+# Click on the match button
 match_button = driver.find_element_by_css_selector(".SetPage-modes > div > div > .SetPageModes-group.SetPageModes-group--play > span:nth-child(1) > div > a")
 match_button.click()
 
