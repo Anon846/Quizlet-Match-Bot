@@ -20,4 +20,8 @@ You can just download that boy.py file and then run it. You'll need to install s
 
 I acknowledge all of that. I literally made this so that I could "brag" to other people about my high score. I am only working on it for the coding part of it. It seriously is fun to optimize a piece of software that achieves it's goal, even if it's just a stupid web bot. As of this moment I am not working on any other projects, so I guess I will just keep working on this.
 
+> Dood wtf why ain't you updating every day?
+
+I ain't 'cause I like to do other things too.
+
 *I will conjure up some more questions soon.*
