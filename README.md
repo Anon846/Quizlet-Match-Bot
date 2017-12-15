@@ -26,4 +26,8 @@ I acknowledge all of that. I literally made this so that I could "brag" to other
 
 I ain't 'cause I like to do other things too. Also, because sometimes it gets boring.
 
+> What the heck is going on why doesn't this exactly work
+
+It don't work because I dun goof.
+
 *I will conjure up some more questions soon.*
