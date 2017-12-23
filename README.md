@@ -1,4 +1,6 @@
-# Quizlet-Match-Bot 🎅🎄🎁🔔🎅🎄🎁🔔
+# Quizlet-Match-Bot (SUSPENDED4NOW) 🎅🎄🎁🔔🎅🎄🎁🔔
+
+### Update: I haven't worked on this in a while and have kind of lost interest at least for the moment. 
 
 You can has demo here: [https://www.youtube.com/watch?v=76W5WLUvEWw](https://www.youtube.com/watch?v=76W5WLUvEWw).
 
