@@ -13,7 +13,7 @@ Right now only Windows is supported (🐧😥). It is planned to add Linux suppo
 ## Get started. 💪👏
 
 
-You can just download that boy.py file and then run it. You'll need to install some packages, and then it'll get running. It'll first prompt for your Quizlet username, then your password (no characters will show up for privacy and security reasons), and then you'll have to paste a URL of a teacher on Quizlet who has some lessons. If you want just to test this bot out, you can use some I made on my profile, over at [https://quizlet.com/Sean6500](https://quizlet.com/Sean6500). When you run the program, a browser window should pop-up, and if it does, then you're probably good.
+You can just download that boy.py file and then run it. You'll need to install some packages, and then it'll get running. It'll first prompt for your Quizlet username, then your password (no characters will show up for privacy and security reasons), and then you'll have to paste a URL of a teacher on Quizlet who has some lessons. When you run the program, a browser window should pop-up, and if it does, then you're probably good.
 
 ## Questions 😵
 
