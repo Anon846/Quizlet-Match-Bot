@@ -1,6 +1,6 @@
-# Quizlet-Match-Bot (SUSPENDED4NOW) 🎅🎄🎁🔔🎅🎄🎁🔔
+# Quizlet-Match-Bot 🎅🎄🎁🔔🎅🎄🎁🔔
 
-### Update: I haven't worked on this in a while and have kind of lost interest at least for the moment. 
+### ~~Update: I haven't worked on this in a while and have kind of lost interest at least for the moment.~~ B4CK 1N BU21N322!!
 
 You can has demo here: [https://www.youtube.com/watch?v=76W5WLUvEWw](https://www.youtube.com/watch?v=76W5WLUvEWw).
 
