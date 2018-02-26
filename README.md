@@ -1,8 +1,8 @@
 # Quizlet-Match-Bot 🎅🎄🎁🔔🎅🎄🎁🔔
 
-### ~~Update: I haven't worked on this in a while and have kind of lost interest at least for the moment.~~ B4CK 1N BU21N322!!
+### ~~Update: I haven't worked on this in a while and have kind of lost interest at least for the moment.~~ Nevermind
 
-You can has demo here: [https://www.youtube.com/watch?v=76W5WLUvEWw](https://www.youtube.com/watch?v=76W5WLUvEWw).
+You can find the demo here: [https://www.youtube.com/watch?v=76W5WLUvEWw](https://www.youtube.com/watch?v=76W5WLUvEWw).
 
 I am making this bot so that I can get a super high score on Quizlet, on the match part. 🚀
 
@@ -24,12 +24,12 @@ You can just download that boy.py file and then run it. You'll need to install s
 
 I acknowledge all of that. I literally made this so that I could "brag" to other people about my high score. I am only working on it for the coding part of it. It seriously is fun to optimize a piece of software that achieves it's goal, even if it's just a stupid web bot. As of this moment I am not working on any other projects, so I guess I will just keep working on this.
 
-> Dood wtf why ain't you updating every day?
+> Dude why aren't you updating every day?
 
-I ain't 'cause I like to do other things too. Also, because sometimes it gets boring.
+I'm not because I like to do other things too. Also, because sometimes it gets boring.
 
-> What the heck is going on why doesn't this exactly work
+> What the heck is going on why doesn't this exactly work?
 
-It don't work because I dun goof.
+It don't work because I am not a robot that's been perfectly programmed.
 
 *I will conjure up some more questions soon.*
