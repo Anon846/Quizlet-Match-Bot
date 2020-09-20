@@ -6,28 +6,30 @@ from selenium.webdriver.common.by import By
 from selenium import webdriver
 from getpass import getpass
 import numpy as np
-import unidecode
+#import unidecode
 import getpass
 import time
 import sys
 
+#THANKS STACKOVERFLOW FOR THESE FEW LINES IT SHUTS GECKODRIVER THE FUCK UP
+#(copy and pasted, suck it)
+#options = webdriver.FirefoxOptions()
+#options.add_argument('-headless')
+
 # Find username of user on computer
 user = getpass.getuser()
 
-# Ask for inputs
-username = input("Username: ")
-password = getpass.getpass()
+# Opens username and password files and then asks for the URL
+username_file = open("username.txt", "rt")
+username = username_file.read()
+username_file.close()
+password_file = open("password.txt", "rt")
+password = password_file.read()
+password_file.close()
 url = input("Unit/Lesson URL: ")
 
-# Find the platform (obviously only Windows /andsoonlinux!/ is supported) and set the driver
-# If you are on macOS feel free to submit a pull request of however the heck you need to set your driver path
-if sys.platform == "win32":
-    directory = r"C:\Users\Jesus Christ\Documents\geckodriver.exe"
-    directory = directory.replace("Jesus Christ", user)
-    driver = webdriver.Firefox()
-
-# Sets up or opens the .txt file that contains completed lessons (completed matches) and
-completed_lessons_titles = open("cl.txt", "w+")
+#driver
+driver = webdriver.Firefox()
 
 # Login to Quizlet
 driver.get("https://quizlet.com/")
@@ -38,16 +40,17 @@ username_field = driver.find_element_by_css_selector(".LoginPromptModal-loginFie
 username_field.send_keys(username)
 password_field = driver.find_element_by_css_selector(".LoginPromptModal-loginFieldsWrapper>.UIInput:nth-child(2)>.UIInput-content>.UIInput-input")
 password_field.send_keys(password)
-login_button_2 = driver.find_element_by_xpath("/html/body/div[4]/div/div[2]/div/div[2]/form/button")
+login_button_2 = driver.find_element_by_xpath("/html/body/div[7]/div/div[2]/form/button")
 login_button_2.click()
-
-# Close the pop-up
-driver.implicitly_wait(10)
-popup_button_1 = driver.find_element_by_css_selector(".UIModal.is-gray.is-open > div > .UIModalHeader > div > span > div > span > button")
-popup_button_1.click()
+login_button_2.click()
 
 # Go to the classroom_url
 driver.get(url)
+
+# Close the pop-up
+driver.implicitly_wait(1)
+popup_button_1 = driver.find_element_by_css_selector("button.UILink--revert")
+popup_button_1.click()
 
 # Conversion list (makes key/value pairs for the matchURL)
 conversion_list_elements = [];
@@ -75,7 +78,7 @@ for i in driver.find_elements_by_css_selector("#SetPageTarget > div > div.SetPag
     spaneng[key] = value
 
 # Click on the match button
-match_button = driver.find_element_by_css_selector(".SetPage-modes > div > div > .SetPageModes-group.SetPageModes-group--play > span:nth-child(1) > div > a")
+match_button = driver.find_element_by_css_selector("div.SetPageModes-group:nth-child(2) > span:nth-child(2) > a:nth-child(1) > div:nth-child(1) > span:nth-child(2) > span:nth-child(1)")
 match_button.click()
 
 # Wait for and then close out of the pop-up
@@ -122,3 +125,4 @@ try:
         i.click()
 except:
     sys.exit()
+
