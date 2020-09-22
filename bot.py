@@ -11,11 +11,6 @@ import getpass
 import time
 import sys
 
-#THANKS STACKOVERFLOW FOR THESE FEW LINES IT SHUTS GECKODRIVER THE FUCK UP
-#(copy and pasted, suck it)
-#options = webdriver.FirefoxOptions()
-#options.add_argument('-headless')
-
 # Find username of user on computer
 user = getpass.getuser()
 
@@ -47,34 +42,21 @@ login_button_2.click()
 # Go to the classroom_url
 driver.get(url)
 
-# Close the pop-up
-driver.implicitly_wait(1)
-popup_button_1 = driver.find_element_by_css_selector("button.UILink--revert")
-popup_button_1.click()
-
-# Conversion list (makes key/value pairs for the matchURL)
-conversion_list_elements = [];
-spanengcontainers = []
+# Dictionary (literally)
 spaneng = {}
+owo = 0
 
-# Iterate through all the elements that contain those key/values
-for i in driver.find_elements_by_css_selector("#SetPageTarget > div > div.SetPage-diagramAndTerms > div.UIDiv.SetPage-termsWrapper > div > div > div > div"):
-    conversion_list_elements.append(i)
-    key_value = driver.find_elements_by_css_selector(".UIDiv.SetPage-termsWrapper > div > div > div > div:nth-child(%d) > div > div > div.SetPageTerm-contentWrapper > div > div" % conversion_list_elements.index(i))
-    key = ""
-    value = ""
-    for x in key_value:
-        if key == "":
-            key = x
-        else:
-            value = x
+#scroll down to load the WHOLE spaneng thing THANKS STACKOVERFLOW
+driver.execute_script("window.scrollTo(0, (document.body.scrollHeight)/2);")
+driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+driver.execute_script("window.scrollTo(0, 0);")
 
-    if (conversion_list_elements.index(i) + 1) != 4:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[%d]/div/div/div[1]/div/div[1]/div/a/span" % (conversion_list_elements.index(i) + 1)).text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[%d]/div/div/div[1]/div/div[2]/div/a/span" % (conversion_list_elements.index(i) + 1)).text
-    else:
-        key = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[1]/div/a/span").text
-        value = driver.find_element_by_xpath("/html/body/div[2]/div[3]/div[1]/div[2]/div/div[3]/div[4]/div/div/div/div[5]/div/div/div[1]/div/div[2]/div/a/span").text
+# Iterate through all the elements that contain those key/values and add to dictionary
+for x in driver.find_elements_by_css_selector("div.SetPageTerms-term"):
+    owo += 1
+    key = driver.find_element_by_css_selector("div.SetPageTerms-term:nth-child(%d) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > span:nth-child(1)" % owo).text
+    value = driver.find_element_by_css_selector("div.SetPageTerms-term:nth-child(%d) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > a:nth-child(1) > span:nth-child(1)" % owo).text
+
     spaneng[key] = value
 
 # Click on the match button
@@ -86,43 +68,21 @@ driver.implicitly_wait(10)
 popup_button = driver.find_element_by_css_selector(".MatchModeInstructionsModal-button > .UIButton--hero")
 popup_button.click()
 
+uwu = 0
 
-# Set the buttons and their text and button array I honestly dont know anymore I am just typing
-a1 = []
-for i in range(12):
-    c = i + 1
-    a1.append(driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(%d)" % c))
+buttonhastext = {}
 
-# Set the texts and what the heck
-a2 = []
-for i in range(12):
-    c = i + 1
-    a2.append(driver.find_element_by_css_selector("#MatchModeTarget > div > div > div > div.ModeLayout-content > div > div > div:nth-child(%d) > div > div.MatchModeQuestionGridTile-content > div > div" % c).text)
+for x in driver.find_elements_by_css_selector("div.MatchModeQuestionGridBoard-tile"):
+    uwu += 1
+    text = driver.find_element_by_xpath("/html/body/div[3]/main/div[3]/div/div/div/div[2]/div/div/div[%d]/div/div/div/div" % uwu).text
+    button = driver.find_element_by_css_selector("div.MatchModeQuestionGridBoard-tile:nth-child(%d)" % uwu)
+    buttonhastext[button] = text
 
-# Array that contains the buttons that haven't been clicked left
-a3 = []
-for i in range(12):
-    a3.append(a1[i])
+print(spaneng.keys())
 
-# Dictionary for the current words that are on the screen to be matched up
-screenmatches = {}
-
-# Compare texts of array against each other and match up
-for i in a2:
-    for h in a2:
-        for spanish, english in spaneng.items():
-            if i == spanish and  h == english:
-                screenmatches[i] = h
-
-#Click on the buttons
-for key, value in screenmatches.items():
-    a1[a2.index(key)].click()
-    a1[a2.index(value)].click()
-
-#Click on the buttons that aren't ended up being clicked (because of the whole unicode issue thing)
-try:
-    for i in a3:
-        i.click()
-except:
-    sys.exit()
+for x, y in buttonhastext.items():
+    if y in spaneng.keys():
+        print(y)
+        
+        
 
